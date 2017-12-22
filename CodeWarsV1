@@ -1,0 +1,46 @@
+//Implement a method that accepts 3 integer values a, b, c. 
+//The method should return true if a triangle can be built with the sides of given length and false in any other case.
+
+//(In this case, all triangles must have surface greater than 0 to be accepted).
+
+//Solution
+namespace Triangle
+{
+  bool isTriangle(int a, int b, int c)
+  {
+    return a-b<c && b-c<a && c-a<b;
+  }
+};
+
+
+//SampleTest
+Describe(TriangleTests)
+{
+    It(Zero_ReturnsFalse)
+    {
+        Assert::That(Triangle::isTriangle(0,0,0),IsFalse());
+        Assert::That(Triangle::isTriangle(0,1,2),IsFalse());
+
+    }
+
+    It(Negative_ReturnsFalse)
+    {
+        Assert::That(Triangle::isTriangle(-17,15,20),IsFalse());
+        Assert::That(Triangle::isTriangle(-17,-15,20),IsFalse());
+    }
+
+
+    It(ValidTriangles_ReturnsTrue)
+    {
+        Assert::That(Triangle::isTriangle(15,17,20),IsTrue());
+        Assert::That(Triangle::isTriangle(10,10,10),IsTrue());
+        Assert::That(Triangle::isTriangle(10,5,10),IsTrue());
+
+    }
+
+    It(InvalidTriangles_ReturnsFalse)
+    {
+        Assert::That(Triangle::isTriangle(3,2,1),IsFalse());
+        Assert::That(Triangle::isTriangle(10,10,20),IsFalse());
+    }
+};
